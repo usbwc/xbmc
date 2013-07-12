@@ -518,7 +518,11 @@ int CXBMCApp::GetMaxSystemVolume(JNIEnv *env)
 }
 
 void CXBMCApp::SetSystemVolume(JNIEnv *env, float percent)
-{
+{ 
+  JNIEnv* envMy = xbmc_jnienv();
+  jclass UtilClass = envMy->FindClass("org/star/time/Util");
+  android_printf("UtilClass %d",UtilClass);
+ 
   CJNIAudioManager audioManager(getSystemService("audio"));
   int maxVolume = (int)(GetMaxSystemVolume() * percent);
   if (audioManager)
